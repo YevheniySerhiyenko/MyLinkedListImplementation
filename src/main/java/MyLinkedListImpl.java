@@ -17,6 +17,11 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     public MyLinkedListImpl() {
     }
 
+    public MyLinkedListImpl(Collection<? extends T> c) {
+        this();
+        addAll(c);
+    }
+
     @Override
     public int hashCode() {
         return 0;
@@ -30,12 +35,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     @Override
     public String toString() {
         return null;
-    }
-
-    //    конструктор для преобразования коллекции в LinkedList
-    public MyLinkedListImpl(Collection<? extends T> c) {
-        this();
-        addAll(c);
     }
 
 
