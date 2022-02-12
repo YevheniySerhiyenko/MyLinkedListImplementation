@@ -16,7 +16,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 //    конструктор по умолчанию
     public MyLinkedListImpl() {
     }
-
+//    конструктор для преобразования коллекции в LinkedList
+//    думаю что можно реализовать как то по другому
     public MyLinkedListImpl(Collection<? extends T> c) {
         this();
         addAll(c);
