@@ -55,7 +55,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public MyLinkedList concat(MyLinkedList newLinkedList) {
+    public MyLinkedList<T> concat(MyLinkedList newLinkedList) {
         return null;
     }
 
