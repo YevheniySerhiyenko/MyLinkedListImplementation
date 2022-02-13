@@ -1,5 +1,7 @@
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Objects;
 
 import static java.util.Collections.addAll;
 
@@ -173,6 +175,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void set(int index, Object element) {
+        Objects.checkIndex(index,size);
         Node newNode = new Node(element);
         Node current = first;
         for (int i = 0; i <= (index - 1); i++) {
@@ -195,7 +198,21 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int index = size;
+        if (o == null) {
+            for (Node x = last; x != null; x = x.prev) {
+                index--;
+                if (x.element == null)
+                    return index;
+            }
+        } else {
+            for (Node x = last; x != null; x = x.prev) {
+                index--;
+                if (o.equals(x.element))
+                    return index;
+            }
+        }
+        return -1;
     }
 
     @Override
