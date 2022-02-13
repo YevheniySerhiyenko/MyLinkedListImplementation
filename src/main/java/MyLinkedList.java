@@ -2,7 +2,7 @@ import java.util.ListIterator;
 
 public interface MyLinkedList<T> {
 
-    void add(T t); //1
+    void add(T t); //1 +
 
     void add(int index, T element); //2
 

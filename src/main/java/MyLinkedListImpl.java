@@ -1,4 +1,3 @@
-import javax.xml.soap.Node;
 import java.util.Collection;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -24,24 +23,28 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         addAll(c);
     }
     private class Node {
+        private Object element;
         private Node prev;
-        private Object data;
         private Node next;
 
-        public Node(Node prev, Object data, Node next) {
-            this.prev = prev;
-            this.data = data;
-            this.next = next;
+        public Node(Object element) {
+            this.element = element;
         }
     }
 
     @Override
     public void add(Object o) {
-        Node node = this.last;
-        Node newNode = new Node(node,o,null);
-        this.last = newNode;
-        if (first == null){ this.first = newNode; }
-        else{ node.next = newNode; }
+        Node newNode = new Node(o);
+        if(first == null) {
+            newNode.next = null;
+            newNode.prev = null;
+            first = newNode;
+            last = newNode;
+        } else {
+            last.next = newNode;
+            newNode.prev = last;
+            last = newNode;
+        }
         size++;
     }
 
