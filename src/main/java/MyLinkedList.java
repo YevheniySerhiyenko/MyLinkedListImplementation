@@ -8,13 +8,13 @@ public interface MyLinkedList<T> {
 
     void sort(); //3
 
-    MyLinkedList<T> concat(MyLinkedList<T> newLinkedList); // вместо метода addAll(); //4
+    void concat(MyLinkedList<T> newLinkedList); // вместо метода addAll(); //4
 
     boolean delete(int index); //5
 
     T get(int index); //6
 
-    int size(); //7
+    int size(); //7 +
 
     T getFirst(); //8
 
@@ -64,6 +64,7 @@ public interface MyLinkedList<T> {
 
     int hashCode(); //31
 
+    void print();
 
 
 

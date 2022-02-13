@@ -1,6 +1,5 @@
 import java.util.Collection;
 import java.util.ListIterator;
-import java.util.stream.Collectors;
 
 import static java.util.Collections.addAll;
 
@@ -27,6 +26,24 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         private Node prev;
         private Node next;
 
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public Node getPrev() {
+            return prev;
+        }
+
+        public void setPrev(Node prev) {
+            this.prev = prev;
+        }
+
+
+
         public Node(Object element) {
             this.element = element;
         }
@@ -34,16 +51,14 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void add(Object o) {
-        Node newNode = new Node(o);
         if(first == null) {
-            newNode.next = null;
-            newNode.prev = null;
-            first = newNode;
-            last = newNode;
+            this.first = new Node(o);
         } else {
-            last.next = newNode;
-            newNode.prev = last;
-            last = newNode;
+            Node node = first;
+            while (node.getNext() != null){
+                node = node.getNext();
+            }
+            node.setNext(new Node(o));
         }
         size++;
     }
@@ -74,10 +89,18 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public MyLinkedList<T> concat(MyLinkedList newLinkedList) {
-        return null;
+    public void concat(MyLinkedList newLinkedList) {
+        Node current = first;
+        Object[] array = newLinkedList.toArray();
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        for(Object t : array) {
+            current.setNext(new Node(t));
+            current = current.getNext();
+        }
+        size += array.length;
     }
-
     @Override
     public boolean delete(int index) {
         return false;
@@ -105,6 +128,14 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public Object deleteFirst() {
+        Node node = first;
+
+        if (first.next == null){
+            last = null;
+        }else{
+            first.next.prev = null;
+        }
+        first = first.next;
         return null;
     }
 
@@ -120,7 +151,15 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void addFirst(Object o) {
+        Node node = new Node(o);
+        if (isEmpty())
+            last = node;
+        else
+            first.prev = node;
 
+        node.next = first;
+        first = node;
+        size++;
     }
 
     @Override
@@ -135,7 +174,20 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public Object set(int index, Object element) {
-        return null;
+        Node node = first;
+        Node setNode = new Node(element);
+        int i = 0;
+        while (i <= index){
+            node = node.getNext();
+            i++;
+        }
+            delete(node);
+            Node temp = node.next;
+            node.next = setNode;
+            setNode.next = temp;
+
+        return setNode.element;
+
     }
 
     @Override
@@ -195,8 +247,48 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] result = new Object[size];
+        int i = 0;
+        for (MyLinkedListImpl.Node x = first; x != null; x = x.next)
+            result[i++] = x.element;
+        return result;
     }
 
+    private boolean isEmpty(){
+        return first == null;
+    }
+
+    @Override
+    public void print(){
+        Node node = first;
+        while (node != null){
+            System.out.print(node.element + " ");
+            node = node.next;
+        }
+    }
+
+    private Node findByIndex(int index) {
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        int tmpIndex = 0;
+        if (first == null) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            return first;
+        }
+
+        Node node = first;
+        while (node.next != null) {
+            node = node.next;
+            tmpIndex++;
+            if (tmpIndex == index) {
+                return node;
+            }
+        }
+        throw new IndexOutOfBoundsException();
+    }
 
 }
