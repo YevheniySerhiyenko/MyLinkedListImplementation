@@ -13,14 +13,36 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     private Node last;
     private int size;
 
-//    конструктор по умолчанию
+    //    конструктор по умолчанию
     public MyLinkedListImpl() {
     }
-//    конструктор для преобразования коллекции в LinkedList
+
+    //    конструктор для преобразования коллекции в LinkedList
 //    думаю что можно реализовать как то по другому
     public MyLinkedListImpl(Collection<? extends T> c) {
         this();
         addAll(c);
+    }
+    private class Node {
+        private Node prev;
+        private Object data;
+        private Node next;
+
+        public Node(Node prev, Object data, Node next) {
+            this.prev = prev;
+            this.data = data;
+            this.next = next;
+        }
+    }
+
+    @Override
+    public void add(Object o) {
+        Node node = this.last;
+        Node newNode = new Node(node,o,null);
+        this.last = newNode;
+        if (first == null){ this.first = newNode; }
+        else{ node.next = newNode; }
+        size++;
     }
 
     @Override
@@ -36,12 +58,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     @Override
     public String toString() {
         return null;
-    }
-
-
-    @Override
-    public void add(Object o) {
-
     }
 
     @Override
@@ -71,7 +87,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -178,4 +194,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     public Object[] toArray() {
         return new Object[0];
     }
+
+
 }
