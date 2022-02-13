@@ -127,7 +127,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public Object deleteFirst() {
+    public void deleteFirst() {
         Node node = first;
 
         if (first.next == null){
@@ -136,7 +136,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
             first.next.prev = null;
         }
         first = first.next;
-        return null;
     }
 
     @Override
@@ -173,20 +172,14 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public Object set(int index, Object element) {
-        Node node = first;
-        Node setNode = new Node(element);
-        int i = 0;
-        while (i <= index){
-            node = node.getNext();
-            i++;
+    public void set(int index, Object element) {
+        Node newNode = new Node(element);
+        Node current = first;
+        for (int i = 0; i <= (index - 1); i++) {
+            current = current.next;
         }
-            delete(node);
-            Node temp = node.next;
-            node.next = setNode;
-            setNode.next = temp;
+        current.element = element;
 
-        return setNode.element;
 
     }
 

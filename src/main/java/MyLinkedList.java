@@ -20,7 +20,7 @@ public interface MyLinkedList<T> {
 
     T getLast(); //9
 
-    T deleteFirst();//10
+    void deleteFirst();//10
 
     T deleteLast();//11
 
@@ -32,7 +32,7 @@ public interface MyLinkedList<T> {
 
     boolean delete(Object o); //15
 
-    T set(int index, T element); //16
+    void set(int index, T element); //16
 
     void clear(); //17
 
