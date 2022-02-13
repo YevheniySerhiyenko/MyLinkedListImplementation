@@ -175,7 +175,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void set(int index, Object element) {
-        Objects.checkIndex(index,size);
+        if (index < 0 && index > size) throw new IndexOutOfBoundsException();
         Node newNode = new Node(element);
         Node current = first;
         for (int i = 0; i <= (index - 1); i++) {
@@ -300,5 +300,4 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         }
         throw new IndexOutOfBoundsException();
     }
-
 }
