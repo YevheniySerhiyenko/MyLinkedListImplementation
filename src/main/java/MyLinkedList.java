@@ -48,8 +48,6 @@ public interface MyLinkedList<T> {
 
     int previousIndex(); //26
 
-    void set(T t); //27
-
     Object[] toArray(); //28
 
     boolean equals(Object o); //29

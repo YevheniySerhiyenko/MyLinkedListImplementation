@@ -1,19 +1,17 @@
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Objects;
 
 import static java.util.Collections.addAll;
 
-
+// no package declaration
 public class MyLinkedListImpl<T> implements MyLinkedList {
 
     private Node first;
     private Node last;
     private int size;
 
-    //    конструктор по умолчанию
+
     public MyLinkedListImpl() {
+        //    конструктор по умолчанию
     }
 
     //    конструктор для преобразования коллекции в LinkedList
@@ -60,11 +58,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public int hashCode() {
-        return 0;
-    }
-
-    @Override
     public boolean equals(Object o) {
         return false;
     }
@@ -76,10 +69,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void add(int index, Object element) {
+        //метод для добавления элемента по индексу
     }
 
     @Override
     public void sort() {
+        //метод для сортировки
     }
 
     @Override
@@ -158,7 +153,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void addLast(Object o) {
-
+    //метод для добавления элемента в конец
     }
 
     @Override
@@ -171,9 +166,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
 
-
-        if (index < 0 && index > size) throw new IndexOutOfBoundsException();
-
         Node newNode = new Node(element);
         Node current = first;
         for (int i = 0; i <= (index - 1); i++) {
@@ -185,7 +177,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void clear() {
-
+        //метод для очистки списка
     }
 
     @Override
@@ -216,10 +208,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     @Override
     public int previousIndex() {
         return 0;
-    }
-
-    @Override
-    public void set(Object o) {
     }
 
     @Override
