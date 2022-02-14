@@ -42,8 +42,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
             this.prev = prev;
         }
 
-
-
         public Node(Object element) {
             this.element = element;
         }
@@ -78,12 +76,10 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void add(int index, Object element) {
-
     }
 
     @Override
     public void sort() {
-
     }
 
     @Override
@@ -171,8 +167,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public void set(int index, Object element) { 
-         if (index < 0 && index > size) throw new IndexOutOfBoundsException();
+    public void set(int index, Object element) {
+
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+
+
+        if (index < 0 && index > size) throw new IndexOutOfBoundsException();
 
         Node newNode = new Node(element);
         Node current = first;
@@ -214,18 +214,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public int nextIndex() {
-        return 0;
-    }
-
-    @Override
     public int previousIndex() {
         return 0;
     }
 
     @Override
     public void set(Object o) {
-
     }
 
     @Override
