@@ -117,7 +117,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void deleteFirst() {
-        Node node = first;
 
         if (first.next == null){
             last = null;
@@ -144,10 +143,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         newNode.prev = null;
         newNode.next = f;
         first = newNode;
-        if (f == null)
+        if (f == null){
             last = newNode;
-        else
+        }
+        else{
             f.prev = newNode;
+        }
         size++;
     }
 
@@ -166,7 +167,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
 
-        Node newNode = new Node(element);
         Node current = first;
         for (int i = 0; i <= (index - 1); i++) {
             current = current.next;
