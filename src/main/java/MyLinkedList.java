@@ -38,19 +38,13 @@ public interface MyLinkedList<T> {
 
     int indexOf(Object o); //18
 
-    int lastIndexOf(Object o); //19
-
     T extract(); // peek(); 20
 
     T extractAndDelete(); //poll(); //21
 
-    ListIterator<T> listIterator(int index); //22
-
     boolean hasNext(); //23
 
     boolean hasPrevious(); //24
-
-    int nextIndex(); //25
 
     int previousIndex(); //26
 
@@ -61,8 +55,6 @@ public interface MyLinkedList<T> {
     boolean equals(Object o); //29
 
     String toString(); //30
-
-    int hashCode(); //31
 
     void print();
 

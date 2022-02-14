@@ -8,7 +8,6 @@ import static java.util.Collections.addAll;
 
 public class MyLinkedListImpl<T> implements MyLinkedList {
 
-
     private Node first;
     private Node last;
     private int size;
@@ -18,7 +17,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     //    конструктор для преобразования коллекции в LinkedList
-//    думаю что можно реализовать как то по другому
     public MyLinkedListImpl(Collection<? extends T> c) {
         this();
         addAll(c);
@@ -53,14 +51,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void add(Object o) {
-        if(first == null) {
-            this.first = new Node(o);
-        } else {
-            Node node = first;
-            while (node.getNext() != null){
-                node = node.getNext();
-            }
-            node.setNext(new Node(o));
+        Node newNode = new Node(o);
+        if (size == 0){
+            first = last = newNode;
+        }else {
+            last.next = newNode;
+            last = newNode;
         }
         size++;
     }
@@ -152,14 +148,15 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void addFirst(Object o) {
-        Node node = new Node(o);
-        if (isEmpty())
-            last = node;
+        Node f = first;
+        Node newNode = new Node(o);
+        newNode.prev = null;
+        newNode.next = f;
+        first = newNode;
+        if (f == null)
+            last = newNode;
         else
-            first.prev = node;
-
-        node.next = first;
-        first = node;
+            f.prev = newNode;
         size++;
     }
 
@@ -175,14 +172,18 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
 
     @Override
     public void set(int index, Object element) {
+
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+
+
         if (index < 0 && index > size) throw new IndexOutOfBoundsException();
+
         Node newNode = new Node(element);
         Node current = first;
         for (int i = 0; i <= (index - 1); i++) {
             current = current.next;
         }
         current.element = element;
-
 
     }
 
@@ -197,36 +198,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public int lastIndexOf(Object o) {
-        int index = size;
-        if (o == null) {
-            for (Node x = last; x != null; x = x.prev) {
-                index--;
-                if (x.element == null)
-                    return index;
-            }
-        } else {
-            for (Node x = last; x != null; x = x.prev) {
-                index--;
-                if (o.equals(x.element))
-                    return index;
-            }
-        }
-        return -1;
-    }
-
-    @Override
     public Object extract() {
         return null;
     }
 
     @Override
     public Object extractAndDelete() {
-        return null;
-    }
-
-    @Override
-    public ListIterator listIterator(int index) {
         return null;
     }
 
