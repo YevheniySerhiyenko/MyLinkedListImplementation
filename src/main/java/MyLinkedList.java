@@ -1,3 +1,6 @@
+import java.util.Comparator;
+import java.util.ListIterator;
+
 
 public interface MyLinkedList<T> {
 
@@ -5,7 +8,9 @@ public interface MyLinkedList<T> {
 
     void add(int index, T element); //2
 
-    void sort(); //3
+    public <T extends Comparable<T>> void sort(); //3
+    
+    public void sort(Comparator c);
 
     void concat(MyLinkedList<T> newLinkedList); // вместо метода addAll(); //4
 
@@ -45,16 +50,28 @@ public interface MyLinkedList<T> {
 
     boolean hasPrevious(); //24
 
+  int nextIndex(); //25
+
+//    int previousIndex(); //26
+
+//    void set(T t); //27
+
     int previousIndex(); //26
 
     Object[] toArray(); //28
 
+    @Override
     boolean equals(Object o); //29
 
+    @Override
     String toString(); //30
 
+    @Override
+    int hashCode(); //31
+    
+    public MyLinkedList<T> subList(int fromIndex, int toIndex);
+    
+    public MyLinkedList<T> reverse();
+
     void print();
-
-
-
 }
