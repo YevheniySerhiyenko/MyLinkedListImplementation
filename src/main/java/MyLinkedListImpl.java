@@ -167,6 +167,11 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T deleteFirst() {
+        return null;
+    }
+
+    @Override
+    public T deleteLast() {
         Node<T> lastNode = last;
         if (lastNode == null) {
             throw new NoSuchElementException();
@@ -188,11 +193,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
-    public T deleteLast() {
-        return null;
-    }
-
-    @Override
     public boolean contains(Object o) {
         return false;
     }
@@ -203,8 +203,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
-    public void addLast(T o) {
-
+    public void addLast(T element) {
+        add(element);
     }
 
     @Override
