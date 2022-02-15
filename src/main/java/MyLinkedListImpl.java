@@ -348,14 +348,34 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public MyLinkedList<T> subList(int fromIndex, int toIndex) {
-	// TODO Auto-generated method stub
-	return null;
+	MyLinkedListImpl<T> temp = new MyLinkedListImpl<>();
+	Node<T> tNode = this.first;
+	for(int i = 0; i < fromIndex; i++) {
+	    tNode = tNode.next;
+	}
+	for(int i = fromIndex; i < toIndex; i++) {
+	    temp.add(tNode.data);
+	    tNode = tNode.next;
+	}
+	return temp;
     }
-
+    
     @Override
     public MyLinkedList<T> reverse() {
-	// TODO Auto-generated method stub
-	return null;
+	Node<T> begin = first;
+	Node<T> end = last;
+//	Node<T> temp = begin;
+//	T begin = first.data;
+//	T end = last.data;
+	
+	for(int i = 0; i < size / 2; i++) {
+	    T temp = begin.data;
+	    begin.data = end.data;
+	    end.data = temp;
+	    begin = begin.next;
+	    end = end.prev;
+	}
+	return this;
     }
 
 
