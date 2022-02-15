@@ -14,6 +14,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     // tail
     private Node<T> last;
     private int size;
+    private int index;
 
     //    конструктор по умолчанию
     public MyLinkedListImpl() {
@@ -70,11 +71,9 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     public void add(int index, T element) {
         if(index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Wrong index");
-        }
-
-        if (index == size)
+        } else if (index == size) {
             add(element);
-        else {
+        } else {
             Node<T> pred = getNode(index).prev;
             Node<T> newNode = new Node<T>(pred, element, getNode(index));
             getNode(index).prev = newNode;
@@ -242,7 +241,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     @Override
     public T extract() {
         Node<T> firstNode = first;
-        
+
         return (firstNode == null) ? null : firstNode.item;
     }
 
@@ -252,13 +251,20 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
-    public ListIterator listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
     public boolean hasNext() {
-        return false;
+        index = size;
+        for (Node<T> node = last; node != null; node = node.prev) {
+            index--;
+            if (node.item == null) {
+                break;
+            }
+        }
+        return index < size;
     }
 
     @Override
@@ -273,7 +279,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public int previousIndex() {
-        return 0;
+        return index - 1;
     }
 
     @Override
