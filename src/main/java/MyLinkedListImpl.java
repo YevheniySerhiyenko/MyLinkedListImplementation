@@ -251,7 +251,22 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+	int index = 0;
+	if(first == null) return -1;
+	if(o == null) {
+	    for(Node<T> temp = first; temp != null; temp = temp.next) {
+		if(temp.data == null) return index;
+		index++;
+	    }
+	}
+	else {
+	    for(Node<T> temp = first; temp != null; temp = temp.next) {
+	    if(temp.data != null && o.getClass() != temp.data.getClass()) return -1;
+		if(o.equals(temp.data)) return index;
+		index++;
+	    }
+	}
+	return -1;
     }
 
     @Override
@@ -266,7 +281,16 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T extractAndDelete() {
-        return null;
+	if(size == 0) return null;
+	Node<T> temp = first;
+	if(size == 1) {
+	    first = null;
+	} else {
+	first = temp.next;
+	first.prev = null;
+	}
+	size--;
+	return temp.data;
     }
 
     @Override
