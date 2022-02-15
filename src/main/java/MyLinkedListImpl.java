@@ -56,7 +56,16 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public String toString() {
-        return null;
+	StringBuilder sb = new StringBuilder("[");
+	Node<T> temp = first;
+	if(temp != null) {
+	    while(temp.next != null) {
+		sb.append(temp.data + ", ");
+		temp = temp.next;
+	    }
+	    sb.append(temp.data);
+	}
+	return sb.append("]").toString();
     }
 
     @Override
