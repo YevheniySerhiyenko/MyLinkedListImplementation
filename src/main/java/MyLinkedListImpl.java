@@ -199,7 +199,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public void addFirst(T o) {
-
     }
 
     @Override
@@ -219,7 +218,15 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public void clear() {
-
+        for (Node<T> node = first; node != null; ) {
+            Node<T> next = node.next;
+            node.item = null;
+            node.next = null;
+            node.prev = null;
+            node = next;
+        }
+        first = last = null;
+        size = 0;
     }
 
     @Override
