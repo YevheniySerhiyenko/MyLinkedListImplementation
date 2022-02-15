@@ -58,7 +58,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        return (this == o);
     }
 
     @Override
@@ -241,7 +241,9 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T extract() {
-        return null;
+        Node<T> firstNode = first;
+        
+        return (firstNode == null) ? null : firstNode.item;
     }
 
     @Override
