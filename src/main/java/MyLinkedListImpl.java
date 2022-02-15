@@ -105,7 +105,23 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T get(int index) {
-        return null;
+	if(size == 0) return null;
+	
+	if(index < 0 || index >= size) {
+	    throw new IndexOutOfBoundsException("Index = " + index + ", List size = " + size);
+	}
+	Node<T> temp = first;
+	if(index < size / 2) {
+	    for(int i = index; i != 0; i--) {
+		temp = temp.next;
+	    }	     
+	} else {
+	    temp = last;
+	    for(int i = size - 1; i != index; i--) {
+		temp = temp.prev;
+	    }	
+	}
+	return temp.data;
     }
 
     @Override
@@ -120,7 +136,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T getLast() {
-        return null;
+        return last.data;
     }
 
     @Override
