@@ -1,16 +1,15 @@
-import javax.xml.soap.Node;
-import java.util.Collection;
-import java.util.ListIterator;
-import java.util.stream.Collectors;
-
 import static java.util.Collections.addAll;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.ListIterator;
 
-public class MyLinkedListImpl<T> implements MyLinkedList {
+
+public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
 
-    private Node first;
-    private Node last;
+    private Node<T> first;
+    private Node<T> last;
     private int size;
 
     //    конструктор по умолчанию
@@ -23,12 +22,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         this();
         addAll(c);
     }
-    private class Node {
-        private Node prev;
-        private Object data;
-        private Node next;
+    private class Node<T> {
+        private Node<T> prev;
+        private T data;
+        private Node<T> next;
 
-        public Node(Node prev, Object data, Node next) {
+        public Node(Node<T> prev, T data, Node<T> next) {
             this.prev = prev;
             this.data = data;
             this.next = next;
@@ -81,7 +80,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public Object get(int index) {
+    public T get(int index) {
         return null;
     }
 
@@ -91,22 +90,22 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public Object getFirst() {
+    public T getFirst() {
         return null;
     }
 
     @Override
-    public Object getLast() {
+    public T getLast() {
         return null;
     }
 
     @Override
-    public Object deleteFirst() {
+    public T deleteFirst() {
         return null;
     }
 
     @Override
-    public Object deleteLast() {
+    public T deleteLast() {
         return null;
     }
 
@@ -151,12 +150,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
     }
 
     @Override
-    public Object extract() {
+    public T extract() {
         return null;
     }
 
     @Override
-    public Object extractAndDelete() {
+    public T extractAndDelete() {
         return null;
     }
 
@@ -180,19 +179,37 @@ public class MyLinkedListImpl<T> implements MyLinkedList {
         return 0;
     }
 
-    @Override
-    public int previousIndex() {
-        return 0;
-    }
+//    @Override
+//    public int previousIndex() {
+//        return 0;
+//    }
 
-    @Override
-    public void set(Object o) {
-
-    }
+//    @Override
+//    public void set(Object o) {
+//
+//    }
 
     @Override
     public Object[] toArray() {
         return new Object[0];
+    }
+
+    @Override
+    public void sort(Comparator c) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public MyLinkedList<T> subList(int fromIndex, int toIndex) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public MyLinkedList<T> reverse() {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 
