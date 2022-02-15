@@ -1,5 +1,6 @@
 import static java.util.Collections.addAll;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.ListIterator;
@@ -74,8 +75,22 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
-    public void sort() {
-
+    public <T extends Comparable<T>> void sort() {
+	
+	int s = this.size();
+	Node temp = this.first;
+	Object[] arr = new Object[s];
+	
+	for(int i = 0; i < s; i++) {
+	    arr[i] = temp.data;
+	    temp = temp.next;
+	}
+	Arrays.sort(arr);
+	temp = this.first;
+	for(int i = 0; i < s; i++) {
+	    temp.data = arr[i];
+	    temp = temp.next;
+	}
     }
 
     @Override
@@ -205,8 +220,20 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public void sort(Comparator c) {
-	// TODO Auto-generated method stub
+	int s = this.size();
+	Node temp = this.first;
+	Object[] arr = new Object[s];
 	
+	for(int i = 0; i < s; i++) {
+	    arr[i] = temp.data;
+	    temp = temp.next;
+	}
+	Arrays.sort(arr, c);
+	temp = this.first;
+	for(int i = 0; i < s; i++) {
+	    temp.data = arr[i];
+	    temp = temp.next;
+	}
     }
 
     @Override
