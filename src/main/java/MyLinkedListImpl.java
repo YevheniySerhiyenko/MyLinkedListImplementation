@@ -151,7 +151,26 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public boolean contains(Object o) {
-        return false;
+	if(first == null) return false;
+	Node<T> temp = first;
+	if(o == null) {
+	    while(temp != null) {
+		if(temp.data == null) {
+		    return true;
+		}
+		temp = temp.next;
+	    }
+	}
+	else {
+	    while(temp != null) {	
+		if(temp.data != null && o.getClass() != temp.data.getClass()) return false;
+		if(o.equals(temp.data)) {
+		    return true;
+		}
+		temp = temp.next;
+	    }
+	}
+	return false;
     }
 
     @Override
@@ -166,7 +185,58 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public boolean delete(Object o) {
-        return false;
+	if(size == 0) return false;
+	Node<T> temp = first;
+	if(o == null) {
+	    if(first.data == null) {
+		first = first.next;
+		first.prev = null;
+		size--;
+		return true;
+	    }
+	    while(temp.next != null) {
+		if(temp.data == null) {
+		    temp.next.prev = temp.prev;		    
+		    temp.prev.next = temp.next;
+		    size--;
+		    return true;
+		}
+		temp = temp.next;
+	    }
+	    if(temp.data == null) {
+		last = temp.prev;
+		last.next = null;
+		size--;
+		return true;
+	    }
+	} else {
+	    if(o.equals(first.data)) {
+		first = first.next;
+		first.prev = null;
+		size--;
+		return true;
+	    }
+	    temp = temp.next;
+	    while(temp.next != null) {
+		if(temp.data != null && o.getClass() != temp.data.getClass()) {
+		    return false; 
+		} 
+		if(o.equals(temp.data)) {
+		    temp.next.prev = temp.prev;		    
+		    temp.prev.next = temp.next;
+		    size--;
+		    return true;
+		}
+		temp = temp.next;
+	    }
+	    if(o.equals(temp.data)) {
+		last = temp.prev;
+		last.next = null;
+		size--;
+		return true;
+	    }
+	}
+	return false;
     }
 
     @Override
