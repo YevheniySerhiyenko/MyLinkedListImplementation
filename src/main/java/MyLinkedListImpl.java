@@ -1,12 +1,25 @@
 import java.util.Collection;
 
+
 import static java.util.Collections.addAll;
 
 public class MyLinkedListImpl<T> implements MyLinkedList<T> {
+=======
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
-    private Node first;
-    private Node last;
+import static java.util.Collections.addAll;
+
+
+public class MyLinkedListImpl<T> implements MyLinkedList<T> {
+
+    // head
+    private Node<T> first;
+  // tail
+    private Node<T> last;
     private int size;
+    private int index;
 
 
     public MyLinkedListImpl() {
@@ -18,17 +31,18 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         this();
         addAll(c);
     }
-    private class Node<T> {
-        private T element;
-        private Node<T> prev;
-        private Node<T> next;
 
-        public Node<T> getNext() {
-            return next;
-        }
+    
 
-        public void setNext(Node next) {
+    private static class Node<T> {
+        T item;
+        Node<T> next;
+        Node<T> prev;
+
+        Node(Node<T> prev, T element, Node<T> next) {
+            this.item = element;
             this.next = next;
+            this.prev = prev;
         }
 
         public Node<T> getPrev() {
@@ -42,23 +56,23 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         public Node(T element) {
             this.element = element;
         }
-    }
 
     @Override
     public void add(T o) {
-        Node newNode = new Node(o);
-        if (size == 0){
-            first = last = newNode;
-        }else {
-            last.next = newNode;
-            last = newNode;
+        Node<T> node = this.last;
+        Node<T> newNode = new Node(node, o, null);
+        this.last = newNode;
+        if (first == null) {
+            this.first = newNode;
+        } else {
+            node.next = newNode;
         }
         size++;
     }
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        return (this == o);
     }
 
     @Override
@@ -67,8 +81,35 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
-    public void add(int index, Object element) {
-        //метод для добавления элемента по индексу
+     public void add(int index, T element) {
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Wrong index");
+        } else if (index == size) {
+            add(element);
+        } else {
+            Node<T> pred = getNode(index).prev;
+            Node<T> newNode = new Node<T>(pred, element, getNode(index));
+            getNode(index).prev = newNode;
+            if (pred == null)
+                first = newNode;
+            else
+                pred.next = newNode;
+            size++;
+        }
+    }
+
+    private Node<T> getNode(int index) {
+        Node<T> node;
+        if (index < (size / 2)) {
+            node = first;
+            for (int i = 0; i < index; i++)
+                node = node.next;
+        } else {
+            node = last;
+            for (int i = size - 1; i > index; i--)
+                node = node.prev;
+        }
+        return node;
     }
 
     @Override
@@ -91,7 +132,32 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
     @Override
     public boolean delete(int index) {
-        return false;
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Wrong index");
+        }
+
+        Node<T> node = getNode(index);
+        Node<T> next = node.next;
+        Node<T> prev = node.prev;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            node.prev = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            node.next = null;
+        }
+
+        node.item = null;
+        size--;
+
+        return true;
     }
 
     @Override
@@ -106,8 +172,14 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T getFirst() {
-        return null;
-    }
+      
+    Node<T> firstNode = first;
+        if (firstNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        return firstNode.item;
+ }
 
     @Override
     public T getLast() {
@@ -123,11 +195,29 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
             first.next.prev = null;
         }
         first = first.next;
-    }
+  }
 
     @Override
     public T deleteLast() {
-        return null;
+
+      Node<T> lastNode = last;
+        if (lastNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        T element = lastNode.item;
+        Node<T> prev = lastNode.prev;
+        lastNode.item = null;
+        lastNode.prev = null;
+        last = prev;
+        if (prev == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+
+        return element;
     }
 
     @Override
@@ -153,8 +243,15 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public void addLast(Object o) {
-        //метод для добавления элемента в конец
     }
+
+    public void addFirst(T o) {
+    }
+
+    @Override
+    public void addLast(T element) {
+        add(element);
+}
 
     @Override
     public boolean delete(Object o) {
@@ -162,6 +259,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     @Override
+
     public void set(int index, Object element) {
 
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
@@ -171,32 +269,46 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
             current = current.next;
         }
         current.element = element;
-
     }
+
 
     @Override
     public void clear() {
-        //метод для очистки списка
+        for (Node<T> node = first; node != null; ) {
+            Node<T> next = node.next;
+            node.item = null;
+            node.next = null;
+            node.prev = null;
+            node = next;
+        }
+        first = last = null;
+        size = 0;
     }
-
-    @Override
-    public int indexOf(Object o) {
+  @Override
+      public int indexOf(Object o) {
         return 0;
     }
 
     @Override
-    public T extract() {
-        return null;
+   public T extract() {
+        Node<T> firstNode = first;
+
+        return (firstNode == null) ? null : firstNode.item;
     }
 
     @Override
-    public T extractAndDelete() {
-        return null;
-    }
-
-    @Override
+   public T extractAndDelete() {
+   }
+   @Override
     public boolean hasNext() {
-        return false;
+        index = size;
+        for (Node<T> node = last; node != null; node = node.prev) {
+            index--;
+            if (node.item == null) {
+                break;
+            }
+        }
+        return index < size;
     }
 
     @Override
@@ -206,17 +318,22 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public int previousIndex() {
-        return 0;
+        return index - 1;
     }
 
     @Override
+
     public Object[] toArray() {
         Object[] result = new Object[size];
         int i = 0;
         for (MyLinkedListImpl.Node x = first; x != null; x = x.next)
-            result[i++] = x.element;
+        { result[i++] = x.element;}
         return result;
     }
+
+    public void set(T o) {
+    }
+
 
     private boolean isEmpty(){
         return first == null;
@@ -231,7 +348,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         }
     }
 
-    private Node findByIndex(int index) {
+   private Node findByIndex(int index) {
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
@@ -255,3 +372,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         throw new IndexOutOfBoundsException();
     }
 }
+
+}
+
