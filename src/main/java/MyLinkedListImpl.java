@@ -111,7 +111,32 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public boolean delete(int index) {
-        return false;
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Wrong index");
+        }
+
+        Node<T> node = getNode(index);
+        Node<T> next = node.next;
+        Node<T> prev = node.prev;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            node.prev = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            node.next = null;
+        }
+
+        node.item = null;
+        size--;
+
+        return true;
     }
 
     @Override
