@@ -1,6 +1,7 @@
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 import static java.util.Collections.addAll;
 
@@ -151,7 +152,12 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T getFirst() {
-        return null;
+        Node<T> firstNode = first;
+        if (firstNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        return firstNode.item;
     }
 
     @Override
@@ -161,7 +167,24 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public T deleteFirst() {
-        return null;
+        Node<T> lastNode = last;
+        if (lastNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        T element = lastNode.item;
+        Node<T> prev = lastNode.prev;
+        lastNode.item = null;
+        lastNode.prev = null;
+        last = prev;
+        if (prev == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+
+        return element;
     }
 
     @Override
