@@ -38,23 +38,17 @@ public interface MyLinkedList<T> {
 
     void set(int index, T element); //16
 
+    T extractAndDelete();
+
     void clear(); //17
 
     int indexOf(Object o); //18
 
     T extract(); // peek(); 20
 
-    T extractAndDelete(); //poll(); //21
-
     boolean hasNext(); //23
 
     boolean hasPrevious(); //24
-
-  int nextIndex(); //25
-
-//    int previousIndex(); //26
-
-//    void set(T t); //27
 
     int previousIndex(); //26
 
@@ -72,6 +66,8 @@ public interface MyLinkedList<T> {
     public MyLinkedList<T> subList(int fromIndex, int toIndex);
     
     public MyLinkedList<T> reverse();
+
+    void set(T o);
 
     void print();
 }

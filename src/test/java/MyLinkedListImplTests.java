@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MyLinkedListImpl_Tests {
+public class MyLinkedListImplTests {
     
     MyLinkedListImpl<Integer> ml;
-    MyLinkedListImpl<Integer> ml_toSort_notNull;
+    MyLinkedListImpl<Integer> mlToSortNotNull;
     MyLinkedListImpl<Double> mld;
     MyLinkedListImpl<TestClass> mlt;
     
@@ -16,7 +16,7 @@ public class MyLinkedListImpl_Tests {
     public void init() {
 	
 	ml = new MyLinkedListImpl<>();
-	ml_toSort_notNull = new MyLinkedListImpl<>();
+	mlToSortNotNull = new MyLinkedListImpl<>();
 	mld = new MyLinkedListImpl<>();
 	mlt = new MyLinkedListImpl<>();
 	
@@ -25,16 +25,16 @@ public class MyLinkedListImpl_Tests {
 	ml.add(-2);
 	ml.add(123);
 	
-	ml_toSort_notNull.add(2);
-	ml_toSort_notNull.add(5);
-	ml_toSort_notNull.add(4);
-	ml_toSort_notNull.add(1);
-	ml_toSort_notNull.add(8);
-	ml_toSort_notNull.add(3);
-	ml_toSort_notNull.add(0);
-	ml_toSort_notNull.add(6);
-	ml_toSort_notNull.add(9);
-	ml_toSort_notNull.add(7);
+	mlToSortNotNull.add(2);
+	mlToSortNotNull.add(5);
+	mlToSortNotNull.add(4);
+	mlToSortNotNull.add(1);
+	mlToSortNotNull.add(8);
+	mlToSortNotNull.add(3);
+	mlToSortNotNull.add(0);
+	mlToSortNotNull.add(6);
+	mlToSortNotNull.add(9);
+	mlToSortNotNull.add(7);
 	
 	mld.add(2.1);
 	mld.add(null);
@@ -53,7 +53,7 @@ public class MyLinkedListImpl_Tests {
     }
     
     @Test    
-    public void add_test() {
+    public void addTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -68,12 +68,12 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void getInt_test() {
+    public void getIntTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
 	
-	Assert.assertEquals(null, ml.get(1));
+	Assert.assertNull(ml.get(1));
 	Assert.assertEquals(new Integer(123), ml.get(3));
 	ml.add(55);
 	Assert.assertEquals(new Integer(55), ml.get(4));
@@ -82,17 +82,16 @@ public class MyLinkedListImpl_Tests {
 	
 	TestClass tk = new TestClass(2, 2, "22T");
 	mlt.add(tk);
-	Assert.assertTrue(tk.equals(mlt.get(3)));
+	Assert.assertEquals(tk, mlt.get(3));
     }
     
     @Test (expected = IndexOutOfBoundsException.class)   
-    public void getIntExeption_test() {
-//	m1 = [1, null, -2, 123]
-	Assert.assertEquals(null, ml.get(5));
+    public void getIntExceptionTest() {
+//	m1 = [1, null, -2, 123]Assert.assertNull(ml.get(5));
     }
     
     @Test    
-    public void getLast_test() {
+    public void getLastTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -104,7 +103,7 @@ public class MyLinkedListImpl_Tests {
     }
     
     @Test    
-    public void containsObject_test() {
+    public void containsObjectTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -115,7 +114,7 @@ public class MyLinkedListImpl_Tests {
     }
     
     @Test    
-    public void deleteObject_test() {
+    public void deleteObjectTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -139,7 +138,7 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void indexOf_test() {
+    public void indexOfTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -156,7 +155,7 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void extractAndDelete_test() {
+    public void extractAndDeleteTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -164,7 +163,7 @@ public class MyLinkedListImpl_Tests {
 	Assert.assertEquals("1", ml.extractAndDelete().toString());
 	Assert.assertEquals("[null, -2, 123]", ml.toString());
 	Assert.assertEquals(3, ml.size());
-	Assert.assertEquals(null, ml.extractAndDelete());
+	Assert.assertNull(ml.extractAndDelete());
 	Assert.assertEquals("[-2, 123]", ml.toString());
 	Assert.assertEquals(2, ml.size());
 	
@@ -179,7 +178,7 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void subList_test() {
+    public void subListTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -200,7 +199,7 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void reverse_test() {
+    public void reverseTest() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -222,15 +221,15 @@ public class MyLinkedListImpl_Tests {
     
     
     @Test    
-    public void sort_test() {
+    public void sortTest() {
 //	m1 = [1, null, -2, 123]
 //	ml_toSort_notNull = [2, 5, 4, 1, 8, 3, 0, 6, 9, 7]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
 	
-	Assert.assertEquals("[2, 5, 4, 1, 8, 3, 0, 6, 9, 7]", ml_toSort_notNull.toString());
-	ml_toSort_notNull.sort();
-	Assert.assertEquals("[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]", ml_toSort_notNull.toString());
+	Assert.assertEquals("[2, 5, 4, 1, 8, 3, 0, 6, 9, 7]", mlToSortNotNull.toString());
+	mlToSortNotNull.sort();
+	Assert.assertEquals("[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]", mlToSortNotNull.toString());
 	
 	ml.sort(new Comparator<Integer>() {
 
