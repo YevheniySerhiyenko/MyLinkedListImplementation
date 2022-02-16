@@ -85,10 +85,11 @@ public class MyLinkedListImplTests {
 	Assert.assertEquals(tk, mlt.get(3));
     }
     
-//    @Test (expected = IndexOutOfBoundsException.class)
-//    public void getIntExceptionTest() {
-//		m1 = [1, null, -2, 123]Assert.assertNull(ml.get(5));
-//    }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void getIntExceptionTest() {
+//		ml = [1, null, -2, 123]
+		Assert.assertNull(ml.get(5));
+    }
     
     @Test    
     public void getLastTest() {
