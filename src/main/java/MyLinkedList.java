@@ -4,68 +4,65 @@ import java.util.ListIterator;
 
 public interface MyLinkedList<T> {
 
-    void add(T t); //1 +
+    void add(T t);
 
-    void add(int index, T element); //2
+    void add(int index, T element);
 
-    public <T extends Comparable<T>> void sort(); //3
+    <T extends Comparable<T>> void sort();
     
-    public void sort(Comparator c);
+    void sort(Comparator c);
 
-    void concat(MyLinkedList<T> newLinkedList); // вместо метода addAll(); //4
+    void concat(MyLinkedList<T> newLinkedList);
 
-    boolean delete(int index); //5
+    boolean delete(int index);
 
-    T get(int index); //6
+    T get(int index);
 
-    int size(); //7 +
+    int size();
 
-    T getFirst(); //8
+    T getFirst();
 
-    T getLast(); //9
+    T getLast();
 
-    void deleteFirst();//10
+    void deleteFirst();
 
-    T deleteLast();//11
+    T deleteLast();
 
-    boolean contains(Object o); //12
+    boolean contains(Object o);
 
-    void addFirst(T t); //13
+    void addFirst(T t);
 
-    void addLast(T t); //14
+    void addLast(T t);
 
-    boolean delete(Object o); //15
+    boolean delete(Object o);
 
-    void set(int index, T element); //16
+    void set(int index, T element);
 
     T extractAndDelete();
 
     void clear(); //17
 
-    int indexOf(Object o); //18
+    int indexOf(Object o);
 
-    T extract(); // peek(); 20
+    T extract();
 
-    boolean hasNext(); //23
+    int previousIndex();
 
-    boolean hasPrevious(); //24
+    int nextIndex();
 
-    int previousIndex(); //26
+    boolean hasNext();
 
-    Object[] toArray(); //28
+    Object[] toArray();
 
-    @Override
-    boolean equals(Object o); //29
+    boolean equals(Object o);
 
-    @Override
-    String toString(); //30
+    String toString();
 
-    @Override
-    int hashCode(); //31
+    int hashCode();
     
-    public MyLinkedList<T> subList(int fromIndex, int toIndex);
+    MyLinkedList<T> subList(int fromIndex, int toIndex);
     
-    public MyLinkedList<T> reverse();
+    MyLinkedList<T> reverse();
 
     void set(T o);
 
