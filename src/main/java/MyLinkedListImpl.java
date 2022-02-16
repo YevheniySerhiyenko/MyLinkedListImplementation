@@ -22,10 +22,10 @@
         }
 
         //    конструктор для преобразования коллекции в LinkedList
-        public MyLinkedListImpl(Collection<? extends T> c) {
-            this();
-            addAll(c);
-        }
+//        public MyLinkedListImpl(Collection<? extends T> c) {
+//            this();
+//            addAll(c);
+//        }
 
         private static class Node<T> {
             private Node<T> prev;
