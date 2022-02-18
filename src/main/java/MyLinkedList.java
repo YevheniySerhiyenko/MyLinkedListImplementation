@@ -64,7 +64,5 @@ public interface MyLinkedList<T> {
     
     MyLinkedList<T> reverse();
 
-    void set(T o);
-
     void print();
 }

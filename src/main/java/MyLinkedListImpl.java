@@ -1,6 +1,9 @@
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+
+import static java.util.Collections.addAll;
 
 
 public class MyLinkedListImpl<T> implements MyLinkedList<T> {
@@ -18,10 +21,10 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
     }
 
     //    конструктор для преобразования коллекции в LinkedList
-//        public MyLinkedListImpl(Collection<? extends T> c) {
-//            this();
-//            addAll(c);
-//        }
+    public MyLinkedListImpl(Collection<? extends T> c) {
+        this();
+        concat((MyLinkedList<T>) c);
+    }
 
     private static class Node<T> {
         private Node<T> prev;
@@ -89,6 +92,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return sb.append("]").toString();
     }
 
+    // метод для добавления элемента
     @Override
     public void add(int index, T element) {
         if (index < 0 || index > size) {
@@ -121,6 +125,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return node;
     }
 
+    // метод для сортировки
     @Override
     public <T extends Comparable<T>> void sort() {
 
@@ -140,20 +145,23 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         }
     }
 
+    // метод для склейки двух LinkedList
     @Override
     public void concat(MyLinkedList<T> newLinkedList) {
         Node<T> current = first;
         Object[] array = newLinkedList.toArray();
+        size += array.length;
         while (current.getNext() != null) {
             current = current.getNext();
         }
-        for (Object t : array) {
-            current.setNext(new Node(t));
+        for (int i = 0; i < array.length; i++) {
+            current.setNext(new Node<>((T) array[i]));
             current = current.getNext();
         }
-        size += array.length;
+
     }
 
+    //   метод для удаления объекта из списка по индексу
     @Override
     public boolean delete(int index) {
         if (index < 0 || index > size) {
@@ -184,6 +192,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return true;
     }
 
+    // метод для получения объекта из списка по индексу
     @Override
     public T get(int index) {
 
@@ -255,6 +264,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return element;
     }
 
+    // метод для проверки наличия объекта в списке
     @Override
     public boolean contains(Object o) {
         if (first == null) return false;
@@ -303,6 +313,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         add(element);
     }
 
+    /* метод для удаления объекта из списка по значению,
+       удаляет только первое совпадение */
     @Override
     public boolean delete(Object o) {
         if (size == 0) return false;
@@ -359,11 +371,19 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return false;
     }
 
+    // метод для замены объекта по индексу
     @Override
-    public void set(int index, Object element) {
+    public void set(int index, T o) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+        Node<T> current = first;
+        for (int i = 0; i <= (index - 1); i++) {
+            current = current.next;
+        }
+        current.item = o;
+
     }
 
+    // метод для получения индекса объекта по значению
     @Override
     public int indexOf(Object o) {
         int i = 0;
@@ -383,6 +403,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return -1;
     }
 
+    /* метод для получения и удаления первого объекта из списка,
+    если список пустой, возвращает значение null*/
     @Override
     public T extractAndDelete() {
         if (size == 0) return null;
@@ -397,6 +419,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return temp.item;
     }
 
+    // метод для очистки списка
     @Override
     public void clear() {
         for (Node<T> node = first; node != null; ) {
@@ -410,6 +433,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         size = 0;
     }
 
+    /* метод для получения первого объекта из списка
+    если список пустой, возвращает значение null */
     @Override
     public T extract() {
         Node<T> firstNode = first;
@@ -439,6 +464,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return index - 1;
     }
 
+    // метод для сортировки коллекции
     @Override
     public void sort(Comparator c) {
         int s = this.size();
@@ -457,6 +483,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         }
     }
 
+    // метод для получения подлиста начиная с fromIndex заканчивая toIndex
     @Override
     public MyLinkedList<T> subList(int fromIndex, int toIndex) {
         MyLinkedListImpl<T> temp = new MyLinkedListImpl<>();
@@ -471,13 +498,11 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return temp;
     }
 
+    // метод возвращает коллекцию в обратном порядке
     @Override
     public MyLinkedList<T> reverse() {
         Node<T> begin = first;
         Node<T> end = last;
-        //	Node<T> temp = begin;
-        //	T begin = first.data;
-        //	T end = last.data;
 
         for (int i = 0; i < size / 2; i++) {
             T temp = begin.item;
@@ -489,6 +514,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
         return this;
     }
 
+    // метод для преобразования коллекции в массив
     @Override
     public Object[] toArray() {
         Object[] result = new Object[size];
@@ -497,15 +523,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
             result[i++] = x.item;
         }
         return result;
-    }
-
-    @Override
-    public void set(T o) {
-        Node<T> current = first;
-        for (int i = 0; i <= (index - 1); i++) {
-            current = current.next;
-        }
-        current.item = o;
     }
 
     @Override

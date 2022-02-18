@@ -53,7 +53,7 @@ public class MyLinkedListImplTests {
     }
     
     @Test    
-    public void addTest() {
+    public void add() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -68,7 +68,7 @@ public class MyLinkedListImplTests {
     
     
     @Test    
-    public void getIntTest() {
+    public void get() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -92,7 +92,7 @@ public class MyLinkedListImplTests {
     }
     
     @Test    
-    public void getLastTest() {
+    public void getLast() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -104,7 +104,7 @@ public class MyLinkedListImplTests {
     }
     
     @Test    
-    public void containsObjectTest() {
+    public void contains() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -115,7 +115,7 @@ public class MyLinkedListImplTests {
     }
     
     @Test    
-    public void deleteObjectTest() {
+    public void delete() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -137,9 +137,22 @@ public class MyLinkedListImplTests {
 	Assert.assertEquals(3, mld.size());
     }
     
-    
+    @Test
+	public void set(){
+		ml.set(0,5);
+		Assert.assertEquals("[5, null, -2, 123]",ml.toString());
+		mld.set(1,345d);
+		Assert.assertEquals("[2.1, 345.0, 2.2, -1.5]",mld.toString());
+	}
+
+	@Test
+	public void concat(){
+		ml.concat(mlToSortNotNull);
+		Assert.assertEquals("[1, null, -2, 123, 2, 5, 4, 1, 8, 3, 0, 6, 9, 7]",ml.toString());
+	}
+
     @Test    
-    public void indexOfTest() {
+    public void indexOf() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -156,7 +169,7 @@ public class MyLinkedListImplTests {
     
     
     @Test    
-    public void extractAndDeleteTest() {
+    public void extractAndDelete() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -179,7 +192,7 @@ public class MyLinkedListImplTests {
     
     
     @Test    
-    public void subListTest() {
+    public void subList() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -200,7 +213,7 @@ public class MyLinkedListImplTests {
     
     
     @Test    
-    public void reverseTest() {
+    public void reverse() {
 //	m1 = [1, null, -2, 123]
 //	mld = [2.1, null, 2.2, -1.5]
 //	mlt = [1 | 2 | One, 2 | 1 | Two, 3 | 3 | Three]
@@ -222,7 +235,7 @@ public class MyLinkedListImplTests {
     
     
     @Test    
-    public void sortTest() {
+    public void sort() {
 //	m1 = [1, null, -2, 123]
 //	ml_toSort_notNull = [2, 5, 4, 1, 8, 3, 0, 6, 9, 7]
 //	mld = [2.1, null, 2.2, -1.5]
