@@ -3,8 +3,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-import static java.util.Collections.addAll;
-
 
 public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
