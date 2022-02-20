@@ -11,14 +11,11 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+		<sonar.organization>yevheniy_serhiyenko</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 	
-	<properties>
-	  <sonar.organization>yevheniyserhiyenko</sonar.organization>
-	  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	</properties>	
-    
-    <dependencies>
+	<dependencies>
     	<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 		    <groupId>junit</groupId>
