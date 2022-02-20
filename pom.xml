@@ -7,20 +7,15 @@
     <groupId>org.example</groupId>
     <artifactId>untitled16</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <properties>
-
+	<properties>
 		<property>
 			<maven.compiler.source>8</maven.compiler.source>
 			<maven.compiler.target>8</maven.compiler.target>
 		</property>
-
-        <property>
-			<sonar.organization>yevheniy_serhiyenko</sonar.organization>
+		<property>
+			<sonar.organization>yevheniyserhiyenko</sonar.organization>
 			<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		</property>
-
-    </properties>
+		</property></properties>
 	
 	<dependencies>
     	<!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -30,6 +25,11 @@
 		    <version>4.13.2</version>
 		    <scope>test</scope>
 		</dependency>
-  	</dependencies>
+	<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.9.1.2184</version>
+		</dependency></dependencies>
 
 </project>
