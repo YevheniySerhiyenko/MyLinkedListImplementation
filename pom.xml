@@ -9,10 +9,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-		<sonar.organization>yevheniy_serhiyenko</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+		<property>
+			<maven.compiler.source>8</maven.compiler.source>
+			<maven.compiler.target>8</maven.compiler.target>
+		</property>
+
+        <property>
+			<sonar.organization>yevheniy_serhiyenko</sonar.organization>
+			<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		</property>
+
     </properties>
 	
 	<dependencies>
